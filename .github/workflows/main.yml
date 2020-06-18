@@ -6,11 +6,10 @@ jobs:
     name: Minify files
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@master
+      # Checks-out your repository under $GITHUB_WORKSPACE, so auto-minify job can access it
+      - uses: actions/checkout@v2
 
-      - name: Brotli compress the html, css and js files in the "build" directory
-        id: brotli
-        uses: charlesworth/compress-action@master
+      - name: Auto Minify
+        uses: nizarmah/auto-minify@master
         with:
-          target-directory: 'build'
+          directory: 'build'
