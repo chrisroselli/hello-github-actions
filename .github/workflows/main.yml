@@ -13,3 +13,4 @@ jobs:
         uses: nizarmah/auto-minify@master
         with:
           directory: 'build'
+          output: 'minified'
