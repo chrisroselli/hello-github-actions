@@ -6,6 +6,27 @@ jobs:
     name: Minify files
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+
+      - name: Brotli compress the html, css and js files in the "build" directory
+        id: brotli
+        uses: charlesworth/compress-action@master
+        with:
+          target-directory: 'build'
+
+
+
+
+
+name: Minify Action
+on: push
+
+jobs:
+  build:
+    name: Minify files
+    runs-on: ubuntu-latest
+    steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so auto-minify job can access it
       - uses: actions/checkout@v2
 
@@ -13,11 +34,10 @@ jobs:
         uses: nizarmah/auto-minify@master
         with:
           directory: 'build'
-          output: 'minify-github-action'
       # Auto commits minified files to the repository
       # Ignore it if you don't want to commit the files to the repository 
       - name: Auto committing minified files
-        uses: stefanzweifel/git-auto-commit-action@v3.0.0
+        uses: stefanzweifel/git-auto-commit-action@master
         with:
           repository: 'minify-github-action'
           commit_message: "Github Action: Auto Minified JS and CSS files"
